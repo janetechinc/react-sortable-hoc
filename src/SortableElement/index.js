@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom';
 import invariant from 'invariant';
 
-import {provideDisplayName, omit} from '../utils';
+import { provideDisplayName, omit } from '../utils';
 
 const propTypes = {
   index: PropTypes.number.isRequired,
@@ -15,7 +14,7 @@ const omittedProps = Object.keys(propTypes);
 
 export default function sortableElement(
   WrappedComponent,
-  config = {withRef: false},
+  config = { withRef: false },
 ) {
   return class WithSortableElement extends React.Component {
     static displayName = provideDisplayName(
@@ -58,9 +57,11 @@ export default function sortableElement(
       this.unregister();
     }
 
+    wrapper = createRef();
+
     register() {
-      const {collection, disabled, index} = this.props;
-      const node = findDOMNode(this);
+      const { collection, disabled, index } = this.props;
+      const node = this.wrapper.current;
 
       node.sortableInfo = {
         collection,
@@ -70,7 +71,7 @@ export default function sortableElement(
       };
 
       this.node = node;
-      this.ref = {node};
+      this.ref = { node };
 
       this.context.manager.add(collection, this.ref);
     }
@@ -88,7 +89,7 @@ export default function sortableElement(
     }
 
     render() {
-      const ref = config.withRef ? 'wrappedInstance' : null;
+      const ref = config.withRef ? 'wrappedInstance' : this.wrapper;
 
       return <WrappedComponent ref={ref} {...omit(this.props, omittedProps)} />;
     }
