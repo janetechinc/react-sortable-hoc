@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom';
 import invariant from 'invariant';
 
 import Manager from '../Manager';
@@ -53,6 +52,8 @@ export default function sortableContainer(
         move: this.handleMove,
         start: this.handleStart,
       };
+
+      this.wrapper = React.createRef();
     }
 
     state = {};
@@ -905,7 +906,7 @@ export default function sortableContainer(
       const {getContainer} = this.props;
 
       if (typeof getContainer !== 'function') {
-        return findDOMNode(this);
+        return this.wrapper.current;
       }
 
       return getContainer(
@@ -1047,9 +1048,13 @@ export default function sortableContainer(
     };
 
     render() {
-      const ref = config.withRef ? 'wrappedInstance' : null;
+      const ref = config.withRef ? 'wrappedInstance' : this.wrapper;
 
-      return <WrappedComponent ref={ref} {...omit(this.props, omittedProps)} />;
+      return (
+        <div ref={ref}>
+          <WrappedComponent {...omit(this.props, omittedProps)} />
+        </div>
+      );
     }
 
     get helperContainer() {

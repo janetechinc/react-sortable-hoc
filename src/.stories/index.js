@@ -39,48 +39,42 @@ const Handle = SortableHandle(({tabIndex}) => (
 ));
 
 const Item = SortableElement(
-  React.forwardRef(
-    (
-      {
-        tabbable,
-        className,
-        isDisabled,
-        height,
-        style: propStyle,
-        shouldUseDragHandle,
-        value,
-        itemIndex,
-        isSorting,
-      },
-      ref,
-    ) => {
-      const bodyTabIndex = tabbable && !shouldUseDragHandle ? 0 : -1;
-      const handleTabIndex = tabbable && shouldUseDragHandle ? 0 : -1;
+  ({
+    tabbable,
+    className,
+    isDisabled,
+    height,
+    style: propStyle,
+    shouldUseDragHandle,
+    value,
+    itemIndex,
+    isSorting,
+  }) => {
+    const bodyTabIndex = tabbable && !shouldUseDragHandle ? 0 : -1;
+    const handleTabIndex = tabbable && shouldUseDragHandle ? 0 : -1;
 
-      return (
-        <div
-          ref={ref}
-          className={classNames(
-            className,
-            isDisabled && style.disabled,
-            isSorting && style.sorting,
-            shouldUseDragHandle && style.containsDragHandle,
-          )}
-          style={{
-            height,
-            ...propStyle,
-          }}
-          tabIndex={bodyTabIndex}
-          data-index={itemIndex}
-        >
-          {shouldUseDragHandle && <Handle tabIndex={handleTabIndex} />}
-          <div className={style.wrapper}>
-            <span>Item</span> {value}
-          </div>
+    return (
+      <div
+        className={classNames(
+          className,
+          isDisabled && style.disabled,
+          isSorting && style.sorting,
+          shouldUseDragHandle && style.containsDragHandle,
+        )}
+        style={{
+          height,
+          ...propStyle,
+        }}
+        tabIndex={bodyTabIndex}
+        data-index={itemIndex}
+      >
+        {shouldUseDragHandle && <Handle tabIndex={handleTabIndex} />}
+        <div className={style.wrapper}>
+          <span>Item</span> {value}
         </div>
-      );
-    },
-  ),
+      </div>
+    );
+  },
 );
 
 const SortableList = SortableContainer(

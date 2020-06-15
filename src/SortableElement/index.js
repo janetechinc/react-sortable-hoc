@@ -95,10 +95,9 @@ export default function sortableElement(
       const ref = config.withRef ? 'wrappedInstance' : this.wrapper;
       const WrappedComponentWithRef = WrappedComponent;
       return (
-        <WrappedComponentWithRef
-          ref={ref}
-          {...omit(this.props, omittedProps)}
-        />
+        <div ref={ref}>
+          <WrappedComponentWithRef {...omit(this.props, omittedProps)} />
+        </div>
       );
     }
   };

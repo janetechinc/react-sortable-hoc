@@ -11,8 +11,13 @@ export default function sortableHandle(
   return class WithSortableHandle extends React.Component {
     static displayName = provideDisplayName('sortableHandle', WrappedComponent);
 
+    constructor(props) {
+      super(props);
+      this.wrapper = React.createRef();
+    }
+
     componentDidMount() {
-      const node = findDOMNode(this);
+      const node = this.wrapper.current;
       node.sortableHandle = true;
     }
 
@@ -27,7 +32,11 @@ export default function sortableHandle(
     render() {
       const ref = config.withRef ? 'wrappedInstance' : null;
 
-      return <WrappedComponent ref={ref} {...this.props} />;
+      return (
+        <div ref={ref}>
+          <WrappedComponent {...this.props} />
+        </div>
+      );
     }
   };
 }
