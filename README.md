@@ -1,11 +1,5 @@
 ## Fork of react-sortable-hoc that is React 16.x compliant
 
-> Breaking change! Please use forwardRef when defining components wrapped by SortablElement. For example...
-
-```
-const Item = SortableElement(React.forwardRef((props, ref) => <div ref={ref}>{/* Stuff... */</div>))
-```
-
 # <img src="https://user-images.githubusercontent.com/1416436/54170652-dfd59d80-444d-11e9-9c51-658638c0454b.png" width="400" alt="React Sortable HOC" />
 
 > A set of higher-order components to turn any list into an animated, accessible and touch-friendly sortable list
