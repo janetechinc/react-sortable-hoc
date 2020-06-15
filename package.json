@@ -1,6 +1,6 @@
 {
   "name": "i-heart-jane-react-sortable-hoc",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "description": "Fork of react-sortable-hoc that is React 16.x compliant",
   "author": {
     "name": "Clauderic Demers",
