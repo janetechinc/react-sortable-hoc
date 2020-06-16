@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import invariant from 'invariant';
+import {ManagerContext} from '../SortableContainer';
 
 import {provideDisplayName, omit} from '../utils';
 
@@ -22,9 +23,7 @@ export default function sortableElement(
       WrappedComponent,
     );
 
-    static contextTypes = {
-      manager: PropTypes.object.isRequired,
-    };
+    static contextType = ManagerContext;
 
     static propTypes = propTypes;
 

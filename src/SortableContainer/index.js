@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import invariant from 'invariant';
 
 import Manager from '../Manager';
@@ -36,6 +35,8 @@ import {
   defaultKeyCodes,
 } from './props';
 
+export const ManagerContext = React.createContext();
+
 export default function sortableContainer(
   WrappedComponent,
   config = {withRef: false},
@@ -61,15 +62,6 @@ export default function sortableContainer(
     static displayName = provideDisplayName('sortableList', WrappedComponent);
     static defaultProps = defaultProps;
     static propTypes = propTypes;
-    static childContextTypes = {
-      manager: PropTypes.object.isRequired,
-    };
-
-    getChildContext() {
-      return {
-        manager: this.manager,
-      };
-    }
 
     componentDidMount() {
       const {useWindowAsScrollContainer} = this.props;
@@ -1051,9 +1043,11 @@ export default function sortableContainer(
       const ref = config.withRef ? 'wrappedInstance' : this.wrapper;
 
       return (
-        <div ref={ref}>
-          <WrappedComponent {...omit(this.props, omittedProps)} />
-        </div>
+        <ManagerContext.Provider value={{manager: this.manager}}>
+          <div ref={ref}>
+            <WrappedComponent {...omit(this.props, omittedProps)} />
+          </div>
+        </ManagerContext.Provider>
       );
     }
 
