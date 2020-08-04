@@ -1,13 +1,18 @@
 {
-  "name": "i-heart-jane-react-sortable-hoc",
-  "version": "1.19.0",
+  "name": "@iheartjane/react-sortable-hoc",
+  "version": "2.0.0",
   "description": "Fork of react-sortable-hoc that is React 16.x compliant",
   "author": {
-    "name": "Clauderic Demers",
-    "email": "me@ced.io"
+    "name": "Jane Technologies",
+    "email": "dev@iheartjane.com"
   },
-  "user": "clauderic",
-  "homepage": "https://github.com/clauderic/react-sortable-hoc",
+  "contributors": [
+    {
+      "name": "Clauderic Demers",
+      "email": "me@ced.io"
+    }
+  ],
+  "homepage": "https://github.com/janetechinc/react-sortable-hoc",
   "source": "src/index.js",
   "main": "dist/react-sortable-hoc.js",
   "umd:main": "dist/react-sortable-hoc.umd.js",
@@ -17,10 +22,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clauderic/react-sortable-hoc.git"
+    "url": "https://github.com/janetechinc/react-sortable-hoc.git"
   },
   "bugs": {
-    "url": "https://github.com/clauderic/react-sortable-hoc/issues"
+    "url": "https://github.com/janetechinc/react-sortable-hoc/issues"
   },
   "keywords": [
     "react",
